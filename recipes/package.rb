@@ -25,7 +25,10 @@ pkgs = value_for_platform_family(
   'debian' => %w{ php5-cgi php5 php5-dev php5-cli php-pear }
 )
 
-include_recipe 'yumrepo::atomic' if platform_family?('rhel')
+# On Amazon Linux, modern PHP packages are in the main repo
+if platform_family?('rhel') and not platform?('amazon')
+  include_recipe 'yumrepo::atomic'
+end
 include_recipe 'apt' if platform_family?('debian')
 
 # Make sure the Apt cache is updated
