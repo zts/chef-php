@@ -27,7 +27,7 @@ pkgs = value_for_platform_family(
 
 # On Amazon Linux, modern PHP packages are in the main repo
 if platform_family?('rhel') and not platform?('amazon')
-  include_recipe 'yumrepo::atomic'
+  include_recipe 'yum-atomic'
 end
 include_recipe 'apt' if platform_family?('debian')
 
